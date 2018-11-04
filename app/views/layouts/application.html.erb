@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Secret</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <%= render "layouts/header" %>
+    <% if logged_in? == false && current_page?(:controller => 'session', :action => 'new') || logged_in? == false && current_page?(:controller => 'users', :action => 'new') %>
+      <%= yield %>
+    <% elsif logged_in? %>
+      <%= yield %>
+    <% else %>
+      <div style="margin-top: 50px; width: 40%; margin-left: auto; margin-right: auto; background-color: lightgrey; padding: 50px; text-align: center;" class="rounded" class="border border-light">
+        Tu ne peux obtenir aucun secret...
+      </div>    
+    <% end %>
+
+  </body>
+</html>
